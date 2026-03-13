@@ -1,0 +1,16 @@
+{
+  "eu_ai_act": {
+    "risk_level": "limited",
+    "articles_applicable": ["Art. 13 – Transparency", "Art. 14 – Human Oversight", "Art. 52 – Transparency obligations"],
+    "conformity_assessment": "self-assessment",
+    "post_market_monitoring": true,
+    "incident_reporting_contact": "compliance@example.com"
+  },
+  "documentation_requirements": {
+    "technical_documentation": true,
+    "risk_log": true,
+    "model_card": true,
+    "data_card": true
+  },
+  "review_cycle_days": 180
+}
