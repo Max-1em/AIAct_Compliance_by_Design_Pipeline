@@ -1,0 +1,21 @@
+{
+  "metrics": [
+    {
+      "name": "demographic_parity_difference",
+      "threshold": 0.05,
+      "description": "Max allowed difference in positive prediction rate across protected groups"
+    },
+    {
+      "name": "equalized_odds_difference",
+      "threshold": 0.05,
+      "description": "Max allowed difference in TPR/FPR across protected groups"
+    },
+    {
+      "name": "accuracy_gap",
+      "threshold": 0.03,
+      "description": "Max allowed accuracy difference between subgroups"
+    }
+  ],
+  "protected_attributes": ["gender", "age_group", "nationality"],
+  "evaluation_dataset": "data/bias_eval_set.csv"
+}
