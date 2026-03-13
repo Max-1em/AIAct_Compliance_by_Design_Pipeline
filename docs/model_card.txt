@@ -1,0 +1,16 @@
+{
+  "model_name": "MyEUComplianceModel",
+  "version": "1.0.0",
+  "model_type": "classification",
+  "risk_category": "limited",
+  "intended_use": "Automated document classification for internal compliance workflows",
+  "out_of_scope": [
+    "Medical diagnosis",
+    "Law enforcement decisions",
+    "Credit scoring"
+  ],
+  "training_data": "Internal labeled dataset, 50 000 samples, 2022–2024",
+  "framework": "scikit-learn",
+  "license": "Proprietary",
+  "contact": "ai-team@example.com"
+}
