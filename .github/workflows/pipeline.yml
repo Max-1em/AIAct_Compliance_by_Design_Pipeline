@@ -1,0 +1,46 @@
+name: EU AI Act Compliance Pipeline
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+jobs:
+  generate-artifacts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install jinja2
+
+      - name: Generate EU AI Act Artifacts
+        run: |
+          python docs/generate_docs.py \
+            --commit "${{ github.sha }}" \
+            --run-id "${{ github.run_id }}" \
+            --actor "${{ github.actor }}" \
+            --ref "${{ github.ref_name }}"
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: eu-ai-act-artifacts-${{ github.sha }}
+          path: artifacts/
+          retention-days: 90
+
+      - name: Tag release
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          TAG="compliance-$(date +'%Y%m%d-%H%M%S')-${GITHUB_SHA::7}"
+          git tag "$TAG"
+          git push origin "$TAG"
