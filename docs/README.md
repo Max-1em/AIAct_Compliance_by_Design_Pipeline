@@ -1,8 +1,8 @@
 # EU AI Act Compliance Pipeline
 
-Automatically generates compliance artifacts on every push via GitHub Actions.
+Generiert automatisch bei jedem Push Artefakte mittels Github actions.
 
-## Repository Structure
+## Repository Struktur
 
 ```
 .
@@ -25,7 +25,7 @@ Automatically generates compliance artifacts on every push via GitHub Actions.
     └── manifest.json           # Traceability manifest (commit SHA, timestamp)
 ```
 
-## Generated Artifacts
+## Generierte Artefakte
 
 | File | EU AI Act Requirement |
 |------|----------------------|
@@ -35,23 +35,15 @@ Automatically generates compliance artifacts on every push via GitHub Actions.
 | `data_card.md` | Art. 10 – Data governance |
 | `manifest.json` | Traceability / version hash |
 
-## How It Works
+## So funktioniert es
 
 1. **Push** any commit → GitHub Actions triggers automatically.
 2. `generate_docs.py` reads the three config files in `docs/` and renders all templates.
 3. Artifacts are uploaded to the **Actions run** (retained 90 days) and tagged with the commit SHA.
 4. On `main` branch pushes a git tag `compliance-<date>-<sha>` is created for long-term traceability.
 
-## Customisation
+## Anpassbarkeit
 
 - **Model metadata** → edit `docs/model_card.txt`
 - **Fairness thresholds** → edit `docs/bias_metrics_config.json`
 - **Risk level / articles** → edit `docs/compliance_config.json`
-
-## Local Test Run
-
-```bash
-pip install jinja2
-python docs/generate_docs.py --commit abc1234 --run-id 0 --actor you --ref main
-# Artifacts appear in ./artifacts/
-```
